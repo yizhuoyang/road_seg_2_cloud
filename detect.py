@@ -168,14 +168,13 @@ class Yolov5Detector:
                     center_y = (bounding_box.ymin + bounding_box.ymax) // 2
 
                     # Add center point to the list
-                    center_points.data.extend([center_x, center_y])
+                    # center_points.data.extend([center_x, center_y])
+                    center_points.data.extend([bounding_box.xmin,bounding_box.ymin,bounding_box.xmax,bounding_box.ymax])
                     # Annotate the image
                     if self.publish_image or self.view_image:  # Add bbox to image
                           # integer class
                         label = f"{self.names[c]} {conf:.2f}"
                         annotator.box_label(xyxy, label, color=colors(c, True))
-
-                
                 ### POPULATE THE DETECTION MESSAGE HERE
 
             # Stream results
