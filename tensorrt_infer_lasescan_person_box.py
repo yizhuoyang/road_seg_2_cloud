@@ -120,7 +120,7 @@ def generate_laserscan(result_mask, depth_image, x, x_coords, laserscan_pub, ima
     laser_scan_msg.range_max = 15.0  # Maximum range value [meters]
     num_of_scan_point = int((laser_scan_msg.angle_max - laser_scan_msg.angle_min) / laser_scan_msg.angle_increment) + 1
     laser_scan_msg.scan_time = num_of_scan_point * laser_scan_msg.time_increment
-    Z = set_outer_border_to_zero(extract_exact_border_and_adjacent(result_mask)) * np.nan_to_num(depth_image)/1000
+    Z = set_outer_border_to_zero(extract_exact_border_and_adjacent(result_mask)) * np.nan_to_num(depth_image)
     # Calculate X
     X = x * Z
     # Calculate angles for all points
@@ -158,9 +158,7 @@ def generate_laserscan_person(box_coords, depth_image, laserscan_pub, image_head
     laser_scan_msg.scan_time = num_of_scan_point * laser_scan_msg.time_increment
 
     box_coords = np.array(box_coords).reshape(-1,4)
-
     x_centers = (box_coords[:, 0] + box_coords[:, 2]) / 2
-    y_centers = (box_coords[:, 1] + box_coords[:, 3]) / 2
 
     # Initialize lists to store valid depths and x coordinates
     valid_x_centers = []
@@ -175,14 +173,16 @@ def generate_laserscan_person(box_coords, depth_image, laserscan_pub, image_head
     # Vectorized depth extraction and median calculation
     for i in range(box_coords.shape[0]):
         box_depths = depth_image[y_min[i]:y_max[i], x_min[i]:x_max[i]]
-        median_depth = np.nanmedian(box_depths)
-        if not np.isnan(median_depth):
-            valid_x_centers.append(x_centers[i])
-            valid_depths.append(median_depth)
+        valid_box_depths = box_depths[box_depths > 0]  # Filter out zero depths
+        if valid_box_depths.size > 0:
+            median_depth = np.nanmedian(valid_box_depths)
+            if not np.isnan(median_depth):
+                valid_x_centers.append(x_centers[i])
+                valid_depths.append(median_depth)
 
     if len(valid_x_centers) > 0:
         valid_x_centers = np.array(valid_x_centers)
-        valid_depths = np.array(valid_depths) / 1000  # Convert depth to meters
+        valid_depths = np.array(valid_depths)   # Convert depth to meters
         Xp = (valid_x_centers - 318) * valid_depths / 476
         Zp = valid_depths
         # Calculate angles for all points
