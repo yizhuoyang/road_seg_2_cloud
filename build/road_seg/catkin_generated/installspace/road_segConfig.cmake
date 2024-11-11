@@ -67,14 +67,14 @@ set(road_seg_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(road_seg_SOURCE_PREFIX /home/kemove/delta_project/Sementic_segmentation/ws_ai/src/road_seg)
-  set(road_seg_DEVEL_PREFIX /home/kemove/delta_project/Sementic_segmentation/ws_ai/devel)
+  set(road_seg_SOURCE_PREFIX /home/kemove/road_seg_2_cloud/src/road_seg)
+  set(road_seg_DEVEL_PREFIX /home/kemove/road_seg_2_cloud/devel)
   set(road_seg_INSTALL_PREFIX "")
   set(road_seg_PREFIX ${road_seg_DEVEL_PREFIX})
 else()
   set(road_seg_SOURCE_PREFIX "")
   set(road_seg_DEVEL_PREFIX "")
-  set(road_seg_INSTALL_PREFIX /home/kemove/delta_project/Sementic_segmentation/ws_ai/install)
+  set(road_seg_INSTALL_PREFIX /home/kemove/road_seg_2_cloud/install)
   set(road_seg_PREFIX ${road_seg_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/kemove/delta_project/Sementic_segmentation/ws_ai/install/lib;/home/kemove/delta_project/Sementic_segmentation/ws_ai/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/kemove/road_seg_2_cloud/install/lib;/home/kemove/road_seg_2_cloud/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

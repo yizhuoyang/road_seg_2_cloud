@@ -1,9 +1,9 @@
-#!/home/kemove/anaconda3/envs/open-mmlab/bin/python3
+#!/home/kemove/anaconda3/envs/il/bin/python3
 # -*- coding: utf-8 -*-
 # generated from catkin/cmake/template/script.py.in
 # creates a relay to a python script source file, acting as that file.
 # The purpose is that of a symlink
-python_script = '/home/kemove/delta_project/Sementic_segmentation/ws_ai/src/road_seg/scripts/road_seg_3d_refine_more.py'
+python_script = '/home/kemove/road_seg_2_cloud/src/road_seg/scripts/road_seg_3d.py'
 with open(python_script, 'r') as fh:
     context = {
         '__builtins__': __builtins__,

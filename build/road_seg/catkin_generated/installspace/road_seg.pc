@@ -1,4 +1,4 @@
-prefix=/home/kemove/delta_project/Sementic_segmentation/ws_ai/install
+prefix=/home/kemove/road_seg_2_cloud/install
 
 Name: road_seg
 Description: Description of road_seg

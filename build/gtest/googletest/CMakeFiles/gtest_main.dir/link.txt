@@ -1,1 +1,1 @@
-/usr/bin/c++ -fPIC -std=c++11 -O3 -shared -Wl,-soname,libgtest_main.so -o ../lib/libgtest_main.so CMakeFiles/gtest_main.dir/src/gtest_main.cc.o  -Wl,-rpath,/home/kemove/delta_project/Sementic_segmentation/ws_ai/build/gtest/lib ../lib/libgtest.so -lpthread 
+/usr/bin/c++ -fPIC -std=c++11 -O3 -shared -Wl,-soname,libgtest_main.so -o ../lib/libgtest_main.so CMakeFiles/gtest_main.dir/src/gtest_main.cc.o  -Wl,-rpath,/home/kemove/road_seg_2_cloud/build/gtest/lib ../lib/libgtest.so -lpthread 

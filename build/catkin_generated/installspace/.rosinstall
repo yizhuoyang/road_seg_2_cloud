@@ -1,2 +1,2 @@
 - setup-file:
-    local-name: /home/kemove/delta_project/Sementic_segmentation/ws_ai/install/setup.sh
+    local-name: /home/kemove/road_seg_2_cloud/install/setup.sh

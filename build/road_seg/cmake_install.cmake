@@ -1,8 +1,8 @@
-# Install script for directory: /home/kemove/delta_project/Sementic_segmentation/ws_ai/src/road_seg
+# Install script for directory: /home/kemove/road_seg_2_cloud/src/road_seg
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/kemove/delta_project/Sementic_segmentation/ws_ai/install")
+  set(CMAKE_INSTALL_PREFIX "/home/kemove/road_seg_2_cloud/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -43,21 +43,21 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/kemove/delta_project/Sementic_segmentation/ws_ai/build/road_seg/catkin_generated/installspace/road_seg.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/kemove/road_seg_2_cloud/build/road_seg/catkin_generated/installspace/road_seg.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/road_seg/cmake" TYPE FILE FILES
-    "/home/kemove/delta_project/Sementic_segmentation/ws_ai/build/road_seg/catkin_generated/installspace/road_segConfig.cmake"
-    "/home/kemove/delta_project/Sementic_segmentation/ws_ai/build/road_seg/catkin_generated/installspace/road_segConfig-version.cmake"
+    "/home/kemove/road_seg_2_cloud/build/road_seg/catkin_generated/installspace/road_segConfig.cmake"
+    "/home/kemove/road_seg_2_cloud/build/road_seg/catkin_generated/installspace/road_segConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/road_seg" TYPE FILE FILES "/home/kemove/delta_project/Sementic_segmentation/ws_ai/src/road_seg/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/road_seg" TYPE FILE FILES "/home/kemove/road_seg_2_cloud/src/road_seg/package.xml")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/road_seg" TYPE PROGRAM FILES "/home/kemove/delta_project/Sementic_segmentation/ws_ai/build/road_seg/catkin_generated/installspace/road_seg_3d_refine_more.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/road_seg" TYPE PROGRAM FILES "/home/kemove/road_seg_2_cloud/build/road_seg/catkin_generated/installspace/road_seg_3d.py")
 endif()
 

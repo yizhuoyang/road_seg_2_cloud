@@ -1,8 +1,8 @@
-# Install script for directory: /home/kemove/delta_project/Sementic_segmentation/ws_ai/src
+# Install script for directory: /home/kemove/road_seg_2_cloud/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/kemove/delta_project/Sementic_segmentation/ws_ai/install")
+  set(CMAKE_INSTALL_PREFIX "/home/kemove/road_seg_2_cloud/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -54,89 +54,89 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/kemove/delta_project/Sementic_segmentation/ws_ai/install/_setup_util.py")
+   "/home/kemove/road_seg_2_cloud/install/_setup_util.py")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/kemove/delta_project/Sementic_segmentation/ws_ai/install" TYPE PROGRAM FILES "/home/kemove/delta_project/Sementic_segmentation/ws_ai/build/catkin_generated/installspace/_setup_util.py")
+  file(INSTALL DESTINATION "/home/kemove/road_seg_2_cloud/install" TYPE PROGRAM FILES "/home/kemove/road_seg_2_cloud/build/catkin_generated/installspace/_setup_util.py")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/kemove/delta_project/Sementic_segmentation/ws_ai/install/env.sh")
+   "/home/kemove/road_seg_2_cloud/install/env.sh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/kemove/delta_project/Sementic_segmentation/ws_ai/install" TYPE PROGRAM FILES "/home/kemove/delta_project/Sementic_segmentation/ws_ai/build/catkin_generated/installspace/env.sh")
+  file(INSTALL DESTINATION "/home/kemove/road_seg_2_cloud/install" TYPE PROGRAM FILES "/home/kemove/road_seg_2_cloud/build/catkin_generated/installspace/env.sh")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/kemove/delta_project/Sementic_segmentation/ws_ai/install/setup.bash;/home/kemove/delta_project/Sementic_segmentation/ws_ai/install/local_setup.bash")
+   "/home/kemove/road_seg_2_cloud/install/setup.bash;/home/kemove/road_seg_2_cloud/install/local_setup.bash")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/kemove/delta_project/Sementic_segmentation/ws_ai/install" TYPE FILE FILES
-    "/home/kemove/delta_project/Sementic_segmentation/ws_ai/build/catkin_generated/installspace/setup.bash"
-    "/home/kemove/delta_project/Sementic_segmentation/ws_ai/build/catkin_generated/installspace/local_setup.bash"
+  file(INSTALL DESTINATION "/home/kemove/road_seg_2_cloud/install" TYPE FILE FILES
+    "/home/kemove/road_seg_2_cloud/build/catkin_generated/installspace/setup.bash"
+    "/home/kemove/road_seg_2_cloud/build/catkin_generated/installspace/local_setup.bash"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/kemove/delta_project/Sementic_segmentation/ws_ai/install/setup.sh;/home/kemove/delta_project/Sementic_segmentation/ws_ai/install/local_setup.sh")
+   "/home/kemove/road_seg_2_cloud/install/setup.sh;/home/kemove/road_seg_2_cloud/install/local_setup.sh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/kemove/delta_project/Sementic_segmentation/ws_ai/install" TYPE FILE FILES
-    "/home/kemove/delta_project/Sementic_segmentation/ws_ai/build/catkin_generated/installspace/setup.sh"
-    "/home/kemove/delta_project/Sementic_segmentation/ws_ai/build/catkin_generated/installspace/local_setup.sh"
+  file(INSTALL DESTINATION "/home/kemove/road_seg_2_cloud/install" TYPE FILE FILES
+    "/home/kemove/road_seg_2_cloud/build/catkin_generated/installspace/setup.sh"
+    "/home/kemove/road_seg_2_cloud/build/catkin_generated/installspace/local_setup.sh"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/kemove/delta_project/Sementic_segmentation/ws_ai/install/setup.zsh;/home/kemove/delta_project/Sementic_segmentation/ws_ai/install/local_setup.zsh")
+   "/home/kemove/road_seg_2_cloud/install/setup.zsh;/home/kemove/road_seg_2_cloud/install/local_setup.zsh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/kemove/delta_project/Sementic_segmentation/ws_ai/install" TYPE FILE FILES
-    "/home/kemove/delta_project/Sementic_segmentation/ws_ai/build/catkin_generated/installspace/setup.zsh"
-    "/home/kemove/delta_project/Sementic_segmentation/ws_ai/build/catkin_generated/installspace/local_setup.zsh"
+  file(INSTALL DESTINATION "/home/kemove/road_seg_2_cloud/install" TYPE FILE FILES
+    "/home/kemove/road_seg_2_cloud/build/catkin_generated/installspace/setup.zsh"
+    "/home/kemove/road_seg_2_cloud/build/catkin_generated/installspace/local_setup.zsh"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/kemove/delta_project/Sementic_segmentation/ws_ai/install/.rosinstall")
+   "/home/kemove/road_seg_2_cloud/install/.rosinstall")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-  file(INSTALL DESTINATION "/home/kemove/delta_project/Sementic_segmentation/ws_ai/install" TYPE FILE FILES "/home/kemove/delta_project/Sementic_segmentation/ws_ai/build/catkin_generated/installspace/.rosinstall")
+  file(INSTALL DESTINATION "/home/kemove/road_seg_2_cloud/install" TYPE FILE FILES "/home/kemove/road_seg_2_cloud/build/catkin_generated/installspace/.rosinstall")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/kemove/delta_project/Sementic_segmentation/ws_ai/build/gtest/cmake_install.cmake")
-  include("/home/kemove/delta_project/Sementic_segmentation/ws_ai/build/road_seg/cmake_install.cmake")
+  include("/home/kemove/road_seg_2_cloud/build/gtest/cmake_install.cmake")
+  include("/home/kemove/road_seg_2_cloud/build/road_seg/cmake_install.cmake")
 
 endif()
 
@@ -148,5 +148,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/kemove/delta_project/Sementic_segmentation/ws_ai/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/kemove/road_seg_2_cloud/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

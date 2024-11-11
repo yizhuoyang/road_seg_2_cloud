@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/kemove/delta_project/Sementic_segmentation/ws_ai/install")
+  set(CMAKE_INSTALL_PREFIX "/home/kemove/road_seg_2_cloud/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -44,7 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/kemove/delta_project/Sementic_segmentation/ws_ai/build/gtest/googletest/cmake_install.cmake")
+  include("/home/kemove/road_seg_2_cloud/build/gtest/googletest/cmake_install.cmake")
 
 endif()
 

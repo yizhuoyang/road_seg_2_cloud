@@ -7,4 +7,4 @@
 # new environment variables
 
 # modified environment variables
-export PWD='/home/kemove/delta_project/Sementic_segmentation/ws_ai/build'
+export PWD='/home/kemove/road_seg_2_cloud/build'

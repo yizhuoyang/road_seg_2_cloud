@@ -1,4 +1,4 @@
-#!/home/kemove/anaconda3/envs/open-mmlab/bin/python3
+#!/home/kemove/anaconda3/envs/il/bin/python3
 # -*- coding: utf-8 -*-
 
 # Software License Agreement (BSD License)
@@ -268,7 +268,7 @@ if __name__ == '__main__':
 
         if not args.local:
             # environment at generation time
-            CMAKE_PREFIX_PATH = r'/home/kemove/delta_project/Sementic_segmentation/ws_ai/devel;/opt/ros/noetic'.split(';')
+            CMAKE_PREFIX_PATH = r'/home/kemove/road_seg_2_cloud/devel;/opt/ros/noetic'.split(';')
         else:
             # don't consider any other prefix path than this one
             CMAKE_PREFIX_PATH = []

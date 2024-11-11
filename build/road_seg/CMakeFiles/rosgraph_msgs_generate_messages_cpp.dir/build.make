@@ -53,10 +53,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kemove/delta_project/Sementic_segmentation/ws_ai/src
+CMAKE_SOURCE_DIR = /home/kemove/road_seg_2_cloud/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kemove/delta_project/Sementic_segmentation/ws_ai/build
+CMAKE_BINARY_DIR = /home/kemove/road_seg_2_cloud/build
 
 # Utility rule file for rosgraph_msgs_generate_messages_cpp.
 
@@ -74,10 +74,10 @@ road_seg/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build: rosgraph_msgs
 .PHONY : road_seg/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
 
 road_seg/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/clean:
-	cd /home/kemove/delta_project/Sementic_segmentation/ws_ai/build/road_seg && $(CMAKE_COMMAND) -P CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/cmake_clean.cmake
+	cd /home/kemove/road_seg_2_cloud/build/road_seg && $(CMAKE_COMMAND) -P CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/cmake_clean.cmake
 .PHONY : road_seg/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/clean
 
 road_seg/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/depend:
-	cd /home/kemove/delta_project/Sementic_segmentation/ws_ai/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kemove/delta_project/Sementic_segmentation/ws_ai/src /home/kemove/delta_project/Sementic_segmentation/ws_ai/src/road_seg /home/kemove/delta_project/Sementic_segmentation/ws_ai/build /home/kemove/delta_project/Sementic_segmentation/ws_ai/build/road_seg /home/kemove/delta_project/Sementic_segmentation/ws_ai/build/road_seg/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/kemove/road_seg_2_cloud/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kemove/road_seg_2_cloud/src /home/kemove/road_seg_2_cloud/src/road_seg /home/kemove/road_seg_2_cloud/build /home/kemove/road_seg_2_cloud/build/road_seg /home/kemove/road_seg_2_cloud/build/road_seg/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : road_seg/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/depend
 

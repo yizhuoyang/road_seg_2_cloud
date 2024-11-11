@@ -1,7 +1,6 @@
 #!/home/kemove/anaconda3/envs/open-mmlab/bin/python3
 
 import sys
-sys.path.append('../')
 print(sys.executable)
 import numpy as np
 import os
@@ -16,7 +15,6 @@ from sensor_msgs.msg import CompressedImage
 from ros_numpy.image import image_to_numpy, numpy_to_image
 import sensor_msgs.point_cloud2 as pc2
 from cv_bridge import CvBridge
-from detection_msgs.msg import BoundingBox, BoundingBoxes
 import std_msgs
 import threading
 
@@ -110,8 +108,7 @@ class SegRos(object):
         self.pointcloud_pub = rospy.Publisher('/pointcloud', PointCloud2, queue_size=1)
         self.depth_sub = rospy.Subscriber('/zed2i/zed_node/depth/depth_registered', Image_type, self.depth_callback)
         self.image_subscriber_yolo = rospy.Subscriber('/yolov5/image_out', Image_type, callback=self.yolo_callback, queue_size=1)
-        self.data_subscriber_yolo = rospy.Subscriber('/yolov5/detections', BoundingBoxes, callback=self.yolo_callback, queue_size=1)
-        self.image_subscriber_zed = rospy.Subscriber('/zed2i/zed_node/right_raw/image_raw_color', Image_type, callback=self.zed_callback, queue_size=1)
+        self.image_subscriber_zed = rospy.Subscriber('/zed2i/zed_node/right_raw/image_raw_color/compressed', CompressedImage, callback=self.zed_callback, queue_size=1)
         self.image_publisher = rospy.Publisher('/image_publish', Image_type, queue_size=1)
         self.x = np.load("/home/kemove/yyz/av-gihub/av-ped/Data/X.npy")
         self.y = np.load("/home/kemove/yyz/av-gihub/av-ped/Data/Y.npy")
@@ -125,9 +122,9 @@ class SegRos(object):
         self.depth_image = image_to_numpy(msg)
 
     def zed_callback(self, msg):
-        image = image_to_numpy(msg)[:,:,:3]
-        # compressed_data = np.frombuffer(msg.data, np.uint8)
-        # image = cv2.imdecode(compressed_data, cv2.IMREAD_COLOR)
+        # image = image_to_numpy(msg)[:,:,:3]
+        compressed_data = np.frombuffer(msg.data, np.uint8)
+        image = cv2.imdecode(compressed_data, cv2.IMREAD_COLOR)
         original_image = image.astype(np.uint8)
         image = cv2.resize(image, (256, 256))
         image = np.array(image, dtype=np.float32).transpose(2, 0, 1)

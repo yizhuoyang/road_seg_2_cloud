@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "road_seg"
-PROJECT_SPACE_DIR = "/home/kemove/delta_project/Sementic_segmentation/ws_ai/devel"
+PROJECT_SPACE_DIR = "/home/kemove/road_seg_2_cloud/devel"
 PROJECT_VERSION = "0.0.0"
