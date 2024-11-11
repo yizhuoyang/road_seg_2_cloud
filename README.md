@@ -56,6 +56,7 @@ Ensure you have the following ready:
 - **Environment Sourcing**: Ensure you source the workspace in each new terminal where you intend to run ROS nodes. This activates the necessary ROS paths and dependencies.
 - **Troubleshooting**: If you encounter issues, verify that all required dependencies are installed and compatible with your ROS setup. Additionally, ensure that your Python environment includes all libraries needed for machine learning and ROS.
 - **Yolo with ROS**: Can be found in this repo: https://github.com/mats-robotics/yolov5_ros
+  
 For further details, consult the documentation or reach out via the repository’s issue tracker.
 
 
