@@ -1,0 +1,8 @@
+prefix=/home/kemove/delta_project/Sementic_segmentation/ws_ai/install
+
+Name: road_seg
+Description: Description of road_seg
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

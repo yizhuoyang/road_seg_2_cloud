@@ -1,0 +1,2 @@
+road_seg
+-DCATKIN_DEVEL_PREFIX=/home/kemove/delta_project/Sementic_segmentation/ws_ai/devel -DCMAKE_INSTALL_PREFIX=/home/kemove/delta_project/Sementic_segmentation/ws_ai/install -G Unix Makefiles
