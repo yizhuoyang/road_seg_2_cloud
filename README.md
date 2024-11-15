@@ -3,6 +3,8 @@
 
 This repository provides the integration of a road segmentation neural network with the ROS (Robot Operating System) framework, enabling real-time road segmentation in robotic applications.
 
+The codes will segment the drivable region and generate correspoding 3D pointcloud based on the depth input.
+
 ---
 
 ## Setup and Usage
@@ -56,6 +58,7 @@ Ensure you have the following ready:
 - **Environment Sourcing**: Ensure you source the workspace in each new terminal where you intend to run ROS nodes. This activates the necessary ROS paths and dependencies.
 - **Troubleshooting**: If you encounter issues, verify that all required dependencies are installed and compatible with your ROS setup. Additionally, ensure that your Python environment includes all libraries needed for machine learning and ROS.
 - **Yolo with ROS**: Can be found in this repo: https://github.com/mats-robotics/yolov5_ros
+If this RosNode also run in the same time, the running script will also privide the 3D location of the pedestrians in the pointcloud format.
   
 For further details, consult the documentation or reach out via the repository’s issue tracker.
 
