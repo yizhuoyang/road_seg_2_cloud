@@ -5,6 +5,8 @@ This repository provides the integration of a road segmentation neural network w
 
 The codes will segment the drivable region and generate correspoding 3D pointcloud based on the depth input.
 
+The networks used in this repo are accelerated by transform the pytorch model into tensorrt model.
+
 ---
 
 ## Setup and Usage
