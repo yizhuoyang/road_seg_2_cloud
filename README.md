@@ -36,11 +36,9 @@ Ensure you have the following ready:
    source devel/setup.bash
    ```
 
-4. **Configure the Script**  
-   Go to the `road_seg_3d` script directory to configure paths and ROS topics:
-   ```bash
-   cd src/road_seg/scripts/road_seg_3d
-   ```
+4. **Configuration**  
+   Go to the launch file and modify the launch files accordingly.
+
    Edit the configuration:
    - Set the path to your trained road segmentation model.
    - Adjust input rostopics and other settings as needed.
@@ -48,16 +46,21 @@ Ensure you have the following ready:
 5. **Run the Road Segmentation Node**  
    Start the road segmentation node with the following command:
    ```bash
-   rosrun road_seg road_seg_3d
+   roslaunch road_seg road_seg_3d 
    ```
-
+   Above is the codes to generate the segmentation results with the boundary of the road in pointcloud2 format (3D)
+   
+   ```bash
+   roslaunch road_seg road_seg_2d 
+   ```
+   Above is the codes to generate the segmentation results with the boundary of the road in laserscan format (2D)
 ---
 
 ## Additional Notes
 
 - **Environment Sourcing**: Ensure you source the workspace in each new terminal where you intend to run ROS nodes. This activates the necessary ROS paths and dependencies.
 - **Troubleshooting**: If you encounter issues, verify that all required dependencies are installed and compatible with your ROS setup. Additionally, ensure that your Python environment includes all libraries needed for machine learning and ROS.
-- **Yolo with ROS**: Can be found in this repo: https://github.com/mats-robotics/yolov5_ros
+- **Yolo with ROS**: Can be found in this repo: https://github.com/yizhuoyang/yolov5_ros.git
 
 If this RosNode also run in the same time, the running script will also privide the 3D location of the pedestrians in the pointcloud format.
 
