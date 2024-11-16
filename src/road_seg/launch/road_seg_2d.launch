@@ -1,0 +1,52 @@
+<launch>
+    <!-- File path parameters -->
+    <arg name="engine_file" default="/home/kemove/delta_project/Sementic_segmentation/semantic-segmentation/output/hdb/DDRNet_DDRNet-23slim_NTU.engine" />
+    <arg name="imgsz_w" default="640" />
+    <arg name="imgsz_h" default="360" />
+    <arg name="cx" default="318" />
+    <arg name="cy" default="180" />
+    <arg name="fx" default="476" />
+    <arg name="fy" default="476" />    
+    <!-- Other configuration parameters -->
+    <arg name="model_size" default="480" />
+    <!-- <arg name="person_location" default="False" /> -->
+    
+    <!-- Topic parameters -->
+    <arg name="input_topic_yolo" default="/yolov5/image_out" />
+    <arg name="input_topic_depth" default="/zed2i/zed_node/depth/depth_registered" />
+    <arg name="input_topic_person" default="/center_points" />
+    <arg name="input_topic_zed" default="/zed2i/zed_node/left/image_rect_color" />
+    <!-- Set to true if use compressed topic as input -->
+    <arg name="is_compressed" default="False" />
+
+    <arg name="output_topic_laser_camera" default="/laser_camera" />
+    <arg name="output_topic_laser_person" default="/laser_person" />
+    <arg name="output_topic_pointcloud" default="/segment_point" />
+    <arg name="output_topic_image" default="/image_publish" />
+    
+    <!-- Launch the node and pass all parameters to the Python script -->
+    <node name="seg_node" pkg="road_seg" type="road_seg_2d.py" output="screen">
+        <!-- Pass file path parameters -->
+        <param name="engine_file" value="$(arg engine_file)" />
+        <param name="cx" value="$(arg cx)" />
+        <param name="cy" value="$(arg cy)" />
+        <param name="fx" value="$(arg fx)" />
+        <param name="fy" value="$(arg fy)" />
+        <param name="imgsz_w" value="$(arg imgsz_w)" />
+        <param name="imgsz_h" value="$(arg imgsz_h)" />       
+        <param name="is_compressed" value="$(arg is_compressed)" />    
+        <!-- Pass other configuration parameters -->
+        <param name="model_size" value="$(arg model_size)" />
+        <!-- <param name="person_location" value="$(arg person_location)" /> -->
+        
+        <!-- Pass topic parameters -->
+        <param name="input_topic_yolo" value="$(arg input_topic_yolo)" />
+        <param name="input_topic_depth" value="$(arg input_topic_depth)" />
+        <param name="input_topic_person" value="$(arg input_topic_person)" />
+        <param name="input_topic_zed" value="$(arg input_topic_zed)" />
+        <param name="output_topic_laser_camera" value="$(arg output_topic_laser_camera)" />
+        <param name="output_topic_laser_person" value="$(arg output_topic_laser_person)" />
+        <param name="output_topic_pointcloud" value="$(arg output_topic_pointcloud)" />
+        <param name="output_topic_image" value="$(arg output_topic_image)" />
+    </node>
+</launch>

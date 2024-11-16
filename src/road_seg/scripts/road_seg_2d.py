@@ -1,7 +1,4 @@
-#!/home/delta/archiconda3/envs/project/bin/python3
-
-import sys
-print(sys.executable)
+import math
 import numpy as np
 import os
 import pycuda.driver as cuda
@@ -17,6 +14,8 @@ import sensor_msgs.point_cloud2 as pc2
 from cv_bridge import CvBridge
 import std_msgs
 import threading
+from sensor_msgs.msg import LaserScan
+from std_msgs.msg import Header, Float32MultiArray
 
 mean = np.array([0.485, 0.456, 0.406]).reshape(-1, 1, 1)
 std = np.array([0.229, 0.224, 0.225]).reshape(-1, 1, 1)
@@ -66,7 +65,6 @@ def infer(engine, img):
         stream.synchronize()
         ctx.pop()
         # ctx.detach()
-
         # Release GPU memory
         input_memory.free()
         output_memory.free()
@@ -74,39 +72,57 @@ def infer(engine, img):
         return output_buffer.copy()
 
 def extract_exact_border_and_adjacent(mask):
-    kernel = np.ones((8,8),np.uint8)
-    dilated_mask = cv2.dilate(mask.astype(np.uint8), kernel, iterations=2)
 
+    kernel = np.ones((5,5),np.uint8)
+    dilated_mask = cv2.dilate(mask.astype(np.uint8), kernel, iterations=2)
     edges = np.zeros_like(mask)
     edges[1:-1, 1:-1] = dilated_mask[1:-1, 1:-1] & (~dilated_mask[:-2, 1:-1] | ~dilated_mask[1:-1, :-2] | ~dilated_mask[2:, 1:-1] | ~dilated_mask[1:-1, 2:])
 
     return edges.astype(int)
+
 
 def set_outer_border_to_zero(array):
     array[[0, -1], :] = 0
     array[:, [0, -1]] = 0
     return array
 
-def generate_point_cloud(result_mask, depth_image, x, y, pointcloud_pub,image_header):
-    Z = set_outer_border_to_zero(extract_exact_border_and_adjacent(result_mask)) * np.nan_to_num(depth_image)/1000
-    # Z = set_outer_border_to_zero(extract_exact_border_and_adjacent(result_mask)) * np.nan_to_num(depth_image)
-    X = x * Z
-    Y = y * Z
-    mask = np.logical_and.reduce((X >= -5, X <= 5, Y >= -1, Y <= 1, Z > 0.1, Z <= 5))
-    X = X[mask]
-    Y = Y[mask]
-    Z = Z[mask]
-    points = np.stack((Z.flatten(), -X.flatten(), Y.flatten()), axis=-1)
-    header = image_header
-    header.frame_id = "camera_link"
-    if len(points) < 100:
-        rospy.logwarn("Not enough valid points to create point cloud.")
-        return
-    # print(len(points))
-    pc_msg = pc2.create_cloud_xyz32(header, points)
-    pointcloud_pub.publish(pc_msg)
 
-class SegRos(object):
+def generate_laserscan(result_mask, depth_image, x, y, laserscan_pub, image_header):
+    laser_scan_msg = LaserScan()
+    laser_scan_msg.header = image_header
+    laser_scan_msg.header.frame_id = 'camera_link'
+    laser_scan_msg.angle_min = -3.142  # Minimum angle [rad]
+    laser_scan_msg.angle_max = 3.142   # Maximum angle [rad]
+    laser_scan_msg.angle_increment = 0.01  # Angular distance between measurements [rad]
+    laser_scan_msg.time_increment = 0.000001  # Time between measurements [seconds]
+    laser_scan_msg.range_min = 0.0  # Minimum range value [meters]
+    laser_scan_msg.range_max = 15.0  # Maximum range value [meters]
+    num_of_scan_point = int((laser_scan_msg.angle_max - laser_scan_msg.angle_min) / laser_scan_msg.angle_increment) + 1
+    laser_scan_msg.scan_time = num_of_scan_point * laser_scan_msg.time_increment
+    Z = set_outer_border_to_zero(extract_exact_border_and_adjacent(result_mask)) * np.nan_to_num(depth_image)/1000
+    # Calculate X
+    X = x * Z
+    # Calculate angles for all points
+    angles = np.arctan2(-X, Z)
+    # Calculate indices for all points
+    index = ((angles - (-3.142)) / 0.01).astype(int)
+    # Filter out invalid indices
+    valid_indices_mask = (index >= 0) & (index < num_of_scan_point)
+    # Calculate distances for all points
+    distances = np.sqrt(X ** 2 + Z ** 2)
+    # Filter out distances outside of range
+    valid_distances_mask = distances <= 15.0
+    # Create a mask for closer points
+    closer_points_mask = (distances < np.inf) & valid_indices_mask & valid_distances_mask
+    # Initialize ranges with infinity
+    laser_scan_msg.ranges = np.full(num_of_scan_point, np.inf)
+    # Update laser scan where distances are closer
+    laser_scan_msg.ranges[index[closer_points_mask]] = distances[closer_points_mask]
+    # Publish the updated laser scan message
+    laserscan_pub.publish(laser_scan_msg)
+
+
+class SegRos:
     def __init__(self, predictor):
         self.predictor = predictor
         self.bridge = CvBridge()
@@ -128,11 +144,14 @@ class SegRos(object):
         self.x = x_transform
         self.y = y_transform    
         # Initialize publishers and subscribers with topic names from parameter server
+        self.laserscan_pub = rospy.Publisher(rospy.get_param("~output_topic_laser_camera"), LaserScan, queue_size=1)
+        self.laserscan_person = rospy.Publisher(rospy.get_param("~output_topic_laser_person"), LaserScan, queue_size=1)
         self.pointcloud_pub = rospy.Publisher(rospy.get_param("~output_topic_pointcloud"), PointCloud2, queue_size=1)
         self.image_publisher = rospy.Publisher(rospy.get_param("~output_topic_image"), Image_type, queue_size=1)
         
         self.depth_sub = rospy.Subscriber(rospy.get_param("~input_topic_depth"), Image_type, self.depth_callback)  
         self.image_subscriber_yolo = rospy.Subscriber(rospy.get_param("~input_topic_yolo"), Image_type, self.yolo_callback, queue_size=1)
+        self.data_subscriber_yolo = rospy.Subscriber(rospy.get_param("~input_topic_person"), Float32MultiArray, self.person_callback, queue_size=1)
         self.is_compressed = rospy.get_param("~is_compressed")  
         if self.is_compressed:
             self.image_subscriber_zed = rospy.Subscriber(rospy.get_param("~input_topic_zed"), CompressedImage, self.zed_callback, queue_size=1)
@@ -141,15 +160,19 @@ class SegRos(object):
         
         self.depth_image = None
 
-
     def yolo_callback(self, msg):
         self.yolo_image = image_to_numpy(msg)
         # Process yolo_image as needed
+
+    def person_callback(self, msg):
+        data = np.array(msg.data)
+        self.box_coords=data
 
     def depth_callback(self, msg):
         self.depth_image = image_to_numpy(msg)
 
     def zed_callback(self, msg):
+
         if self.is_compressed:
             compressed_data = np.frombuffer(msg.data, np.uint8)
             image = cv2.imdecode(compressed_data, cv2.IMREAD_COLOR)
@@ -166,27 +189,29 @@ class SegRos(object):
         result_image = infer(self.predictor, image)
         result_image = result_image.reshape((2, self.size, self.size))
         result_image = np.argmax(result_image, 0)
-        result_mask = cv2.resize(result_image.astype(np.uint8), (640, 360))
+        result_mask = cv2.resize(result_image.astype(np.uint8), (self.imgsz_w, self.imgsz_h))
         result_image = result_image.astype(np.uint8)
         result_image = postprocess(np.reshape(result_image, (self.size, self.size))).convert('RGB')
         result_image = np.array(result_image)
-        result_image = cv2.resize(result_image, (640, 360))
-
+        result_image = cv2.resize(result_image, (self.imgsz_w, self.imgsz_h))
         blended_image = self.blend_images(original_image, result_image)
         self.image_publisher.publish(numpy_to_image(blended_image, encoding='bgr8'))
 
         if self.depth_image is not None:
-            threading.Thread(target=generate_point_cloud, args=(result_mask, self.depth_image, self.x, self.y, self.pointcloud_pub,image_header)).start()
-
+            threading.Thread(target=generate_laserscan, args=(result_mask, self.depth_image, self.x, self.y, self.laserscan_pub,image_header)).start()
+            # if self.person_location:
+            #     threading.Thread(target=generate_laserscan_person, args=(self.box_coords,self.depth_image, self.laserscan_person, image_header)).start()
+    
     def blend_images(self, img1, img2):
         if self.yolo_image is not None:
-            blended_image = cv2.addWeighted(self.yolo_image, 0.8, img2, 0.2, 0)
+            blended_image = cv2.addWeighted(self.yolo_image, 0.7, img2, 0.3, 0)
         else:
-            blended_image = cv2.addWeighted(img1, 0.6, img2, 0.4, 0)
+            blended_image = cv2.addWeighted(img1, 0.5, img2, 0.5, 0)
         return blended_image
 
     def spin(self):
         rospy.spin()
+
 
 if __name__ == "__main__":
     rospy.init_node("seg_node")
@@ -198,4 +223,3 @@ if __name__ == "__main__":
     
     seg_ros = SegRos(predictor=engine)
     seg_ros.spin()
-
