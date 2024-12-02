@@ -7,6 +7,10 @@ The codes will segment the drivable region and generate correspoding 3D pointclo
 
 The networks used in this repo are accelerated by transform the pytorch model into tensorrt model.
 
+The pytorch model (.pt) needs to transfered into .onnx using torch.onnx.export(), then the onnx is required to be transferred into .engine file using tenserrt: 
+```bash
+./trtexec --onnx='save_path/ddrnet.onnx' --saveEngine='save_path/ddrnet.engine' --fp16
+```
 ---
 
 ## Setup and Usage
@@ -63,7 +67,7 @@ Ensure you have the following ready:
 - **Environment Sourcing**: Ensure you source the workspace in each new terminal where you intend to run ROS nodes. This activates the necessary ROS paths and dependencies.
 - **Troubleshooting**: If you encounter issues, verify that all required dependencies are installed and compatible with your ROS setup. Additionally, ensure that your Python environment includes all libraries needed for machine learning and ROS.
 - **Yolo with ROS**: Can be found in this repo: https://github.com/yizhuoyang/yolov5_ros.git
-
+- **Pretrain weights and real time inference**: a pretrained model in onnx format has been uploaded and can be found in this page.
 If this RosNode also run in the same time, the running script will also privide the 3D location of the pedestrians in the pointcloud format.
 
 For further details, consult the documentation or reach out via the repository’s issue tracker.
