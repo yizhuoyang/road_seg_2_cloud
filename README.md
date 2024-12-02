@@ -11,6 +11,8 @@ The pytorch model (.pt) needs to transfered into .onnx using torch.onnx.export()
 ```bash
 ./trtexec --onnx='save_path/ddrnet.onnx' --saveEngine='save_path/ddrnet.engine' --fp16
 ```
+This repo provides an onnx file with input shape 480*480, which can be directly used to transfer into engine file.
+
 ---
 
 ## Setup and Usage
