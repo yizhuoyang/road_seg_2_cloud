@@ -70,6 +70,10 @@ Ensure you have the following ready:
 - **Troubleshooting**: If you encounter issues, verify that all required dependencies are installed and compatible with your ROS setup. Additionally, ensure that your Python environment includes all libraries needed for machine learning and ROS.
 - **Yolo with ROS**: Can be found in this repo: https://github.com/yizhuoyang/yolov5_ros.git
 - **Pretrain weights and real time inference**: a pretrained model in onnx format has been uploaded and can be found in this page.
+- **Depth setting**: since ZED camera has different depth setting, if no pointcloud generated, check the following code and delete /1000:
+```bash
+    Z = set_outer_border_to_zero(extract_exact_border_and_adjacent(result_mask)) * np.nan_to_num(depth_image)/1000
+```
 If this RosNode also run in the same time, the running script will also privide the 3D location of the pedestrians in the pointcloud format.
 
 For further details, consult the documentation or reach out via the repository’s issue tracker.
